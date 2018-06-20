@@ -34,8 +34,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+                @if (Model.Slug == "home")
+                {
+
+                    @Html.EditorFor(model => model.Slug, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+                }
+                else
+                { 
+                    @Html.EditorFor(model => model.Slug, new {htmlAttributes = new {@class = "form-control"}})
+
+                }
+                @Html.ValidationMessageFor(model => model.Slug, "", new {@class = "text-danger"})
             </div>
         </div>
 
