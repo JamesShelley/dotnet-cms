@@ -171,5 +171,28 @@ namespace CMS.Areas.Admin.Controllers
             return RedirectToAction("EditPage");
         }
 
+        public ActionResult PageDetails(int id)
+        {
+
+            //Declare PagVM
+            PageVM model;
+
+            using (Db db = new Db())
+            {
+                // GET the page
+                PageDTO dto = db.Pages.Find(id);
+                // Confirm the page exists
+                if (dto == null)
+                {
+                    return Content("The page does not exist");
+                }
+                
+                // Init the PageVM
+                model = new PageVM(dto);
+            }
+            // Return the view with model
+            return View(model);
+        }
+
     }
 }
