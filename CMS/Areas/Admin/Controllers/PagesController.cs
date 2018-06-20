@@ -194,10 +194,20 @@ namespace CMS.Areas.Admin.Controllers
             return View(model);
         }
 
-        public ActionResult DeletePage()
+        public ActionResult DeletePage(int id)
         {
+            using (Db db = new Db())
+            {
 
-            return View();
+                // GET the page
+                PageDTO dto = db.Pages.Find(id);
+                //Remove the page
+                db.Pages.Remove(dto);
+                //Save 
+                db.SaveChanges();
+            }
+            //Redirect
+            return RedirectToAction("index");
         }
 
     }
