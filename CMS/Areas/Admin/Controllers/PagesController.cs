@@ -87,10 +87,28 @@ namespace CMS.Areas.Admin.Controllers
 
         }
 
-
+        // GET: Admin/Pages/EditPage/id
         public ActionResult EditPage(int id)
-        {
-            return View();
+        {   
+            // Declare PageVM
+            PageVM model;
+
+            using (Db db = new Db())
+            {
+
+                // Get the page
+                PageDTO dto = db.Pages.Find(id);
+                // Confirm the page exists
+                if (dto == null)
+                {
+                    return Content("The page does not exist");
+                } 
+                // Initialize PageVM
+                model = new PageVM(dto);
+
+            }
+            // Return view with model
+            return View(model);
         }
     }
 }
