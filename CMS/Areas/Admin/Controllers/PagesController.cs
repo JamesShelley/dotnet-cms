@@ -194,5 +194,11 @@ namespace CMS.Areas.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult DeletePage()
+        {
+
+            return View();
+        }
+
     }
 }
