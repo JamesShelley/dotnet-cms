@@ -171,6 +171,7 @@ namespace CMS.Areas.Admin.Controllers
             return RedirectToAction("EditPage");
         }
 
+        // GET : Admin/Pages/PageDetails/id
         public ActionResult PageDetails(int id)
         {
 
@@ -194,6 +195,7 @@ namespace CMS.Areas.Admin.Controllers
             return View(model);
         }
 
+        // GET : Admin/Pages/DeletePage/id
         public ActionResult DeletePage(int id)
         {
             using (Db db = new Db())
@@ -208,6 +210,33 @@ namespace CMS.Areas.Admin.Controllers
             }
             //Redirect
             return RedirectToAction("index");
+        }
+
+        [HttpPost]
+        // POST: Admin/Pages/ReorderPages
+        public void ReorderPages(int[] id)
+        {
+
+            using (Db db = new Db())
+            {
+
+                // Set initial Count
+                int count = 1;
+                // Declare PageDTO
+                PageDTO dto;
+                // Set sorting for each page
+                foreach (var pageId in id)
+                {
+                    dto = db.Pages.Find(pageId);
+                    dto.Sorting = count;
+
+                    db.SaveChanges();
+
+                    count++;
+                }
+            }
+
+            // return
         }
 
     }

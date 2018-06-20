@@ -7,8 +7,10 @@
 <h2>Pages</h2>
 
 <p>
-    @Html.ActionLink("Add New Page", "AddPage")
-
+    @Html.ActionLink("Add New Page", "AddPage")    
+</p>
+<p>
+    Drag and drop to Reorder Pages (home can't be reordered).
 </p>
 
 @if (!Model.Any())
@@ -86,7 +88,13 @@ else
                 placeholder: "ui-state-highlight",
                 update: function() {
                     var ids = $("table#pages tbody").sortable("serialize");
-                    console.log(ids);
+                    var url = "/Admin/Pages/ReorderPages";
+
+                    $.post(url,
+                        ids,
+                        function(data) {
+
+                        });
                 }
             
             });
