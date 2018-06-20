@@ -24,5 +24,18 @@ namespace CMS.Areas.Admin.Controllers
             //Return the view with the list
             return View(pagesList);
         }
+
+        // GET: Admin/Pages/AddPage
+        [HttpGet]
+        public ActionResult AddPage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddPage()
+        {
+            return View();
+        }
+
     }
 }
