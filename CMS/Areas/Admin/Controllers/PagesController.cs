@@ -239,5 +239,48 @@ namespace CMS.Areas.Admin.Controllers
             // return
         }
 
+        [HttpGet]
+        // GET : Admin/Pages/EditSidebar
+        public ActionResult EditSidebar()
+        {
+
+            //Declare Model
+            SidebarVM model;
+            using (Db db = new Db())
+            {
+                // GET the DTO
+                SidebarDTO dto = db.Sidebar.Find(1);
+                
+                // init the Model
+                model = new SidebarVM(dto);
+            }
+
+            // Return view with model
+            return View(model);
+        }
+
+        [HttpPost]
+        // POST : Admin/Pages/EditSidebar
+        public ActionResult EditSideBar(SidebarVM model)
+        {
+
+            using (Db db = new Db())
+            {
+
+                // Get the DTO
+                SidebarDTO dto = db.Sidebar.Find(1);
+                // DTO the body
+                dto.Body = model.Body;
+                // Save
+                db.SaveChanges();
+            }
+
+            // Set template message
+            TempData["SM"] = "You have editted the Sidebar";
+            // Redirect
+
+            return RedirectToAction("EditSideBar");
+        }
+
     }
 }
