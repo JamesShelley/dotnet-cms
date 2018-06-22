@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CMS.Models.Data
 {
-    [Table("tblCatgories")]
+    [Table("tblCategories")]
     public class CategoryDTO
     {
         [Key]
